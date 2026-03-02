@@ -23,77 +23,122 @@
         </nav>
 
         <div id="paso-material" class="tab-content activo">
-          <h2>Selección de Material</h2>
+          <h2>Location details</h2>
           <p>
-            Aquí pondremos los interruptores (toggles) que tienes en la imagen
-            para ver si se permite zanja, varilla, etc.
+            Select the best fill material for your grounding system based on
+            your location requirements.
           </p>
+
+          <div class="toggles-container">
+            <label class="toggle-row">
+              <span
+                >Horizontal trench excavation permitted (min. depth 0.3m / 1
+                feet)</span
+              >
+              <div class="toggle-switch">
+                <input type="checkbox" id="t_trench" checked />
+                <span class="slider"></span>
+              </div>
+            </label>
+
+            <label class="toggle-row">
+              <span
+                >Vertical hole excavation permitted (min. depth 1.2m / 4
+                feet)</span
+              >
+              <div class="toggle-switch">
+                <input type="checkbox" id="t_hole" checked />
+                <span class="slider"></span>
+              </div>
+            </label>
+
+            <label class="toggle-row">
+              <span>Clean or potable water available</span>
+              <div class="toggle-switch">
+                <input type="checkbox" id="t_water" checked />
+                <span class="slider"></span>
+              </div>
+            </label>
+
+            <label class="toggle-row">
+              <span style="color: #999">Dust free installation</span>
+              <div class="toggle-switch">
+                <input type="checkbox" id="t_dust" />
+                <span class="slider"></span>
+              </div>
+            </label>
+          </div>
+
           <button class="btn-siguiente" data-next="paso-calculadora">
-            Siguiente: Calculadora
+            Calculadora
           </button>
         </div>
 
         <div id="paso-calculadora" class="tab-content oculto">
-          <h2>Calculadora de Dimensiones</h2>
-          <p>
-            Aquí va el formulario de ancho, profundidad y la fórmula matemática
-            que armamos antes.
-          </p>
-          <button class="btn-siguiente" data-next="paso-resumen">
-            Siguiente: Resumen
+          <h2>Dimensions Calculator</h2>
+
+          <div class="form-grupo">
+            <label for="tipo_instalacion">Tipo de Instalación:</label>
+            <select id="tipo_instalacion">
+              <option value="zanja">Zanja Horizontal (Trench)</option>
+              <option value="varilla">Varilla Vertical (Rod)</option>
+            </select>
+          </div>
+
+          <div id="campos_zanja" class="seccion-dinamica">
+            <div class="form-grupo">
+              <label for="z_ancho">Ancho de la zanja (cm):</label>
+              <input type="number" id="z_ancho" value="10" min="1" />
+            </div>
+            <div class="form-grupo">
+              <label for="z_profundidad">Profundidad del producto (cm):</label>
+              <input type="number" id="z_profundidad" value="5" min="1" />
+            </div>
+            <div class="form-grupo">
+              <label for="z_longitud"
+                >Longitud total de la zanja (metros):</label
+              >
+              <input type="number" id="z_longitud" value="10" min="1" />
+            </div>
+          </div>
+
+          <div id="campos_varilla" class="seccion-dinamica oculto">
+            <div class="form-grupo">
+              <label for="v_diametro">Diámetro de perforación (cm):</label>
+              <input type="number" id="v_diametro" value="15" min="1" />
+            </div>
+            <div class="form-grupo">
+              <label for="v_longitud"
+                >Profundidad de la perforación (metros):</label
+              >
+              <input type="number" id="v_longitud" value="2.4" min="1" />
+            </div>
+          </div>
+
+          <button id="btn_calcular" class="btn-calcular">
+            Calcular y ver Resumen
           </button>
         </div>
 
         <div id="paso-resumen" class="tab-content oculto">
           <h2>Resumen de tu Proyecto</h2>
-          <p>Aquí mostraremos el total de sacos requeridos.</p>
-        </div>
-      </div>
 
-      <div class="form-grupo">
-        <label for="tipo_instalacion">Tipo de Instalación:</label>
-        <select id="tipo_instalacion">
-          <option value="zanja">Zanja Horizontal (Trench)</option>
-          <option value="varilla">Varilla Vertical (Rod)</option>
-        </select>
-      </div>
+          <div id="resultado_box" class="resultado-box">
+            <h4>Resultado Estimado:</h4>
+            <p>Volumen a rellenar: <span id="res_volumen">0</span> m³</p>
+            <p class="destacado">
+              Sacos recomendados: <strong id="res_sacos">0</strong>
+            </p>
+          </div>
 
-      <div id="campos_zanja" class="seccion-dinamica">
-        <div class="form-grupo">
-          <label for="z_ancho">Ancho de la zanja (cm):</label>
-          <input type="number" id="z_ancho" value="10" min="1" />
-        </div>
-        <div class="form-grupo">
-          <label for="z_profundidad">Profundidad del producto (cm):</label>
-          <input type="number" id="z_profundidad" value="5" min="1" />
-        </div>
-        <div class="form-grupo">
-          <label for="z_longitud">Longitud total de la zanja (metros):</label>
-          <input type="number" id="z_longitud" value="10" min="1" />
-        </div>
-      </div>
-
-      <div id="campos_varilla" class="seccion-dinamica oculto">
-        <div class="form-grupo">
-          <label for="v_diametro">Diámetro de perforación (cm):</label>
-          <input type="number" id="v_diametro" value="15" min="1" />
-        </div>
-        <div class="form-grupo">
-          <label for="v_longitud"
-            >Profundidad de la perforación (metros):</label
+          <button
+            class="tab-btn"
+            data-target="paso-calculadora"
+            style="margin-top: 20px; text-decoration: underline"
           >
-          <input type="number" id="v_longitud" value="2.4" min="1" />
+            ← Volver a la calculadora
+          </button>
         </div>
-      </div>
-
-      <button id="btn_calcular" class="btn-calcular">Calcular Sacos</button>
-
-      <div id="resultado_box" class="resultado-box oculto">
-        <h4>Resultado Estimado:</h4>
-        <p>Volumen a rellenar: <span id="res_volumen">0</span> m³</p>
-        <p class="destacado">
-          Sacos recomendados: <strong id="res_sacos">0</strong>
-        </p>
       </div>
     </div>
   </body>

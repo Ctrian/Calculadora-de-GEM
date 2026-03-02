@@ -56,6 +56,8 @@ document.addEventListener('DOMContentLoaded', function () {
         boxResultado.classList.add('oculto');
     });
 
+    // ... (Mantén toda la parte superior de tu script igual hasta llegar al btnCalcular)
+
     btnCalcular.addEventListener('click', function (e) {
         e.preventDefault();
 
@@ -79,8 +81,26 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const sacosNecesarios = Math.ceil(volumenTotalM3 / rendimientoSacoM3);
 
+        // Actualizamos los textos
         txtVolumen.textContent = volumenTotalM3.toFixed(4);
         txtSacos.textContent = sacosNecesarios;
-        boxResultado.classList.remove('oculto');
+
+        // --- NUEVA LÓGICA: Salto automático a la pestaña Resumen ---
+
+        // 1. Ocultar todos los contenidos
+        document.querySelectorAll('.tab-content').forEach(contenido => {
+            contenido.classList.add('oculto');
+        });
+
+        // 2. Quitar 'activo' de todos los botones del breadcrumb
+        document.querySelectorAll('.tab-btn').forEach(tab => {
+            tab.classList.remove('activo');
+        });
+
+        // 3. Mostrar el paso resumen
+        document.getElementById('paso-resumen').classList.remove('oculto');
+
+        // 4. Activar el botón de resumen en el breadcrumb
+        document.querySelector('.tab-btn[data-target="paso-resumen"]').classList.add('activo');
     });
 });
