@@ -1,6 +1,5 @@
-/* Estilos básicos para la calculadora */
 .calculadora-mejorador-container {
-  max-width: 600px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 20px;
   background: #f9f9f9;
@@ -26,7 +25,8 @@
   border-radius: 4px;
 }
 
-.btn-calcular, .btn-siguiente {
+.btn-calcular,
+.btn-siguiente {
   background-color: #0056b3;
   color: white;
   padding: 10px 20px;
@@ -37,7 +37,8 @@
   width: 100%;
 }
 
-.btn-calcular, .btn-siguiente:hover {
+.btn-calcular,
+.btn-siguiente:hover {
   background-color: #004494;
 }
 
@@ -92,63 +93,219 @@
 
 /* --- ESTILOS PARA LOS TOGGLES (INTERRUPTORES) --- */
 .toggles-container {
-    margin: 20px 0;
-    border: 1px solid #eaeaea;
-    padding: 15px;
-    border-radius: 8px;
-    background: #fff;
+  margin: 20px 0;
+  border: 1px solid #eaeaea;
+  padding: 15px;
+  border-radius: 8px;
+  background: #fff;
 }
 
 .toggle-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid #f0f0f0;
-    cursor: pointer;
-    font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+  font-size: 14px;
 }
 
 .toggle-row:last-child {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 .toggle-switch {
-    position: relative;
-    width: 44px;
-    height: 24px;
-    flex-shrink: 0; /* Evita que el switch se aplaste si el texto es muy largo */
+  position: relative;
+  width: 44px;
+  height: 24px;
+  flex-shrink: 0; /* Evita que el switch se aplaste si el texto es muy largo */
 }
 
 .toggle-switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
 .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-color: #ccc;
-    transition: .4s;
-    border-radius: 24px;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 24px;
 }
 
 .slider:before {
-    position: absolute;
-    content: "";
-    height: 18px; width: 18px;
-    left: 3px; bottom: 3px;
-    background-color: white;
-    transition: .4s;
-    border-radius: 50%;
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
 }
 
 input:checked + .slider {
-    background-color: #4285f4; /* Azul de Google/nVent */
+  background-color: #4285f4; /* Azul de Google/nVent */
 }
 
 input:checked + .slider:before {
-    transform: translateX(20px);
+  transform: translateX(20px);
+}
+
+/* --- LAYOUT A DOS COLUMNAS --- */
+.app-layout {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start; /* Evita que las columnas se estiren verticalmente */
+  margin-top: 20px;
+}
+
+.columna-izquierda {
+  flex: 1; /* Ocupa el espacio restante */
+  min-width: 0; /* Evita desbordamientos en flexbox */
+}
+
+.columna-derecha {
+  width: 350px; /* Ancho fijo para tu tarjeta interactiva */
+  flex-shrink: 0; /* Evita que se aplaste en pantallas medianas */
+}
+
+/* --- ESTILOS DE LA TARJETA INFORMATIVA --- */
+.info-card {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.05),
+    0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  position: sticky; /* Hace que la tarjeta te siga al hacer scroll hacia abajo */
+  top: 20px;
+  transition: all 0.3s ease;
+}
+
+.info-card h3 {
+  margin-top: 0;
+  font-size: 1.1rem;
+  color: #1f2937;
+  border-bottom: 2px solid #f3f4f6;
+  padding-bottom: 10px;
+}
+
+.info-card p {
+  font-size: 0.9rem;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+/* --- RESPONSIVE: Para móviles y tablets pequeñas --- */
+@media (max-width: 768px) {
+  .app-layout {
+    flex-direction: column;
+  }
+  .columna-derecha {
+    width: 100%;
+    order: -1; /* Opcional: pone la imagen ARRIBA del formulario en móviles */
+  }
+}
+
+/* --- ESTILOS PARA EL TAB SUMMARY --- */
+.summary-layout {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  margin-top: 10px;
+}
+
+.summary-image-container {
+  flex: 1;
+  text-align: center;
+}
+
+.summary-image-container img {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.summary-caption {
+  font-size: 0.8rem;
+  color: #6b7280;
+  margin-top: 10px;
+}
+
+.summary-details-card {
+  flex: 1;
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.summary-details-card h3 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  color: #1f2937;
+  margin-bottom: 20px;
+}
+
+.summary-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+}
+
+.summary-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #f3f4f6;
+  font-size: 0.95rem;
+}
+
+.summary-list li:last-child {
+  border-bottom: none;
+}
+
+.summary-list li span {
+  color: #6b7280;
+}
+
+.summary-list li strong {
+  color: #1f2937;
+}
+
+.summary-list li.highlight strong {
+  color: #0056b3;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid #0056b3;
+  color: #0056b3;
+  padding: 10px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  display: block;
+  text-align: center;
+  font-weight: bold;
+}
+
+.btn-outline:hover {
+  background: #f0f7ff;
+}
+
+/* Responsive para el summary */
+@media (max-width: 768px) {
+  .summary-layout {
+    flex-direction: column;
+  }
 }

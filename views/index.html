@@ -22,122 +22,151 @@
           <button class="tab-btn" data-target="paso-resumen">Summary</button>
         </nav>
 
-        <div id="paso-material" class="tab-content activo">
-          <h2>Location details</h2>
-          <p>
-            Select the best fill material for your grounding system based on
-            your location requirements.
-          </p>
-
-          <div class="toggles-container">
-            <label class="toggle-row">
-              <span
-                >Horizontal trench excavation permitted (min. depth 0.3m / 1
-                feet)</span
-              >
-              <div class="toggle-switch">
-                <input type="checkbox" id="t_trench" checked />
-                <span class="slider"></span>
+        <div class="app-layout">
+          <div class="columna-izquierda">
+            <div id="paso-material" class="tab-content activo">
+              <h2>Location details</h2>
+              <p>
+                Select the best fill material for your grounding system based on
+                your location requirements.
+              </p>
+              <div class="toggles-container">
+                <label class="toggle-row">
+                  <span>Horizontal trench excavation permitted</span>
+                  <div class="toggle-switch">
+                    <input type="checkbox" id="t_trench" checked /><span
+                      class="slider"
+                    ></span>
+                  </div>
+                </label>
+                <label class="toggle-row">
+                  <span>Vertical hole excavation permitted</span>
+                  <div class="toggle-switch">
+                    <input type="checkbox" id="t_hole" checked /><span
+                      class="slider"
+                    ></span>
+                  </div>
+                </label>
               </div>
-            </label>
+              <button class="btn-siguiente" data-next="paso-calculadora">
+                Next: Calculator
+              </button>
+            </div>
 
-            <label class="toggle-row">
-              <span
-                >Vertical hole excavation permitted (min. depth 1.2m / 4
-                feet)</span
-              >
-              <div class="toggle-switch">
-                <input type="checkbox" id="t_hole" checked />
-                <span class="slider"></span>
+            <div id="paso-calculadora" class="tab-content oculto">
+              <h2>Dimensions Calculator</h2>
+              <div class="form-grupo">
+                <label for="tipo_instalacion">Tipo de Instalación:</label>
+                <select id="tipo_instalacion">
+                  <option value="zanja">Zanja Horizontal (Trench)</option>
+                  <option value="varilla">Varilla Vertical (Rod)</option>
+                </select>
               </div>
-            </label>
-
-            <label class="toggle-row">
-              <span>Clean or potable water available</span>
-              <div class="toggle-switch">
-                <input type="checkbox" id="t_water" checked />
-                <span class="slider"></span>
+              <div id="campos_zanja" class="seccion-dinamica">
+                <div class="form-grupo">
+                  <label>Ancho (cm):</label
+                  ><input type="number" id="z_ancho" value="10" />
+                </div>
+                <div class="form-grupo">
+                  <label>Profundidad (cm):</label
+                  ><input type="number" id="z_profundidad" value="5" />
+                </div>
+                <div class="form-grupo">
+                  <label>Longitud (m):</label
+                  ><input type="number" id="z_longitud" value="10" />
+                </div>
               </div>
-            </label>
-
-            <label class="toggle-row">
-              <span style="color: #999">Dust free installation</span>
-              <div class="toggle-switch">
-                <input type="checkbox" id="t_dust" />
-                <span class="slider"></span>
+              <div id="campos_varilla" class="seccion-dinamica oculto">
+                <div class="form-grupo">
+                  <label>Diámetro (cm):</label
+                  ><input type="number" id="v_diametro" value="15" />
+                </div>
+                <div class="form-grupo">
+                  <label>Profundidad (m):</label
+                  ><input type="number" id="v_longitud" value="2.4" />
+                </div>
               </div>
-            </label>
-          </div>
-
-          <button class="btn-siguiente" data-next="paso-calculadora">
-            Calculadora
-          </button>
-        </div>
-
-        <div id="paso-calculadora" class="tab-content oculto">
-          <h2>Dimensions Calculator</h2>
-
-          <div class="form-grupo">
-            <label for="tipo_instalacion">Tipo de Instalación:</label>
-            <select id="tipo_instalacion">
-              <option value="zanja">Zanja Horizontal (Trench)</option>
-              <option value="varilla">Varilla Vertical (Rod)</option>
-            </select>
-          </div>
-
-          <div id="campos_zanja" class="seccion-dinamica">
-            <div class="form-grupo">
-              <label for="z_ancho">Ancho de la zanja (cm):</label>
-              <input type="number" id="z_ancho" value="10" min="1" />
+              <button id="btn_calcular" class="btn-calcular">
+                Calcular y ver Resumen
+              </button>
             </div>
-            <div class="form-grupo">
-              <label for="z_profundidad">Profundidad del producto (cm):</label>
-              <input type="number" id="z_profundidad" value="5" min="1" />
-            </div>
-            <div class="form-grupo">
-              <label for="z_longitud"
-                >Longitud total de la zanja (metros):</label
-              >
-              <input type="number" id="z_longitud" value="10" min="1" />
+
+            <div id="paso-resumen" class="tab-content oculto">
+              <div class="summary-layout">
+                <div class="summary-image-container">
+                  <img
+                    id="summary-img"
+                    src="https://placehold.co/400x300/e2e8f0/475569?text=Imagen+Resumen"
+                    alt="Layout representation"
+                  />
+                  <p class="summary-caption">
+                    Layout representation. Image is suggestive.
+                  </p>
+                </div>
+
+                <div class="summary-details-card">
+                  <h3>Details</h3>
+                  <ul class="summary-list">
+                    <li>
+                      <span>Configuration</span>
+                      <strong id="sum-config">--</strong>
+                    </li>
+                    <li>
+                      <span>Volumen a rellenar</span>
+                      <strong><span id="sum-vol">0</span> m³</strong>
+                    </li>
+                    <li class="highlight">
+                      <span>Sacos de mejorador necesarios</span>
+                      <strong id="sum-bags">0</strong>
+                    </li>
+                  </ul>
+
+                  <button
+                    class="tab-btn btn-outline"
+                    data-target="paso-calculadora"
+                  >
+                    <svg
+                      style="
+                        width: 16px;
+                        height: 16px;
+                        display: inline;
+                        vertical-align: text-bottom;
+                      "
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+                      ></path>
+                    </svg>
+                    Edit configuration
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
+          <div class="columna-derecha" id="panel-informativo">
+            <div class="info-card">
+              <h3 id="info-titulo">Horizontal grounding</h3>
+              <p id="info-desc">
+                A grounding system setup involves the installation of conductive
+                materials in a horizontal arrangement to establish a
+                low-resistance path...
+              </p>
 
-          <div id="campos_varilla" class="seccion-dinamica oculto">
-            <div class="form-grupo">
-              <label for="v_diametro">Diámetro de perforación (cm):</label>
-              <input type="number" id="v_diametro" value="15" min="1" />
-            </div>
-            <div class="form-grupo">
-              <label for="v_longitud"
-                >Profundidad de la perforación (metros):</label
-              >
-              <input type="number" id="v_longitud" value="2.4" min="1" />
+              <img
+                id="info-img"
+                src="https://placehold.co/400x300/e2e8f0/475569?text=Imagen+Zanja"
+                alt="Guía visual"
+                style="width: 100%; border-radius: 8px; margin-top: 15px"
+              />
             </div>
           </div>
-
-          <button id="btn_calcular" class="btn-calcular">
-            Calcular y ver Resumen
-          </button>
-        </div>
-
-        <div id="paso-resumen" class="tab-content oculto">
-          <h2>Resumen de tu Proyecto</h2>
-
-          <div id="resultado_box" class="resultado-box">
-            <h4>Resultado Estimado:</h4>
-            <p>Volumen a rellenar: <span id="res_volumen">0</span> m³</p>
-            <p class="destacado">
-              Sacos recomendados: <strong id="res_sacos">0</strong>
-            </p>
-          </div>
-
-          <button
-            class="tab-btn"
-            data-target="paso-calculadora"
-            style="margin-top: 20px; text-decoration: underline"
-          >
-            ← Volver a la calculadora
-          </button>
         </div>
       </div>
     </div>
